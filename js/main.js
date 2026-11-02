@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   inicjujMenuMobilne();
   inicjujModalGalerii();
   inicjujPrzyciskPowrotu();
+  inicjujPasekPostepu();
+  inicjujFiltryGalerii();
 });
 
 // ---------- 1. Menu mobilne (hamburger) ----------
@@ -100,5 +102,78 @@ function inicjujPrzyciskPowrotu() {
 
   przycisk.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+// ---------- 4. Pasek postępu przewijania ----------
+function inicjujPasekPostepu() {
+  const pasek = document.querySelector(".pasek-postepu");
+
+  if (!pasek) return;
+
+  // Oblicza procent przewinięcia strony i ustawia szerokość paska
+  const aktualizujPasek = () => {
+    const maksimum = document.documentElement.scrollHeight - window.innerHeight;
+    const procent = maksimum > 0 ? (window.scrollY / maksimum) * 100 : 0;
+    pasek.style.width = `${procent}%`;
+  };
+
+  window.addEventListener("scroll", aktualizujPasek, { passive: true });
+  window.addEventListener("resize", aktualizujPasek);
+  aktualizujPasek();
+}
+
+// ---------- 5. Filtrowanie galerii ----------
+function inicjujFiltryGalerii() {
+  const przyciski = document.querySelectorAll(".filtry__przycisk");
+  const kafelki = document.querySelectorAll(".galeria__element");
+  const CZAS_ANIMACJI = 300;
+
+  if (przyciski.length === 0) return;
+
+  // Ukrywa nagłówek i siatkę, jeśli nie ma w niej widocznych zdjęć
+  const aktualizujGrupy = () => {
+    document.querySelectorAll(".galeria").forEach((siatka) => {
+      const pusta = !siatka.querySelector(".galeria__element:not(.galeria__element--ukryty)");
+      siatka.classList.toggle("galeria--ukryta", pusta);
+      const naglowek = siatka.previousElementSibling;
+      if (naglowek && naglowek.classList.contains("galeria__naglowek")) {
+        naglowek.classList.toggle("galeria__naglowek--ukryty", pusta);
+      }
+    });
+  };
+
+  const filtruj = (kategoria) => {
+    kafelki.forEach((kafelek) => {
+      const pasuje = kategoria === "wszystkie" || kafelek.dataset.category === kategoria;
+
+      if (pasuje) {
+        // Pokazanie kafelka z płynnym wejściem
+        kafelek.classList.remove("galeria__element--ukryty");
+        requestAnimationFrame(() => kafelek.classList.remove("galeria__element--znika"));
+      } else {
+        // Płynne zniknięcie, a potem usunięcie z układu
+        kafelek.classList.add("galeria__element--znika");
+        setTimeout(() => {
+          if (kafelek.classList.contains("galeria__element--znika")) {
+            kafelek.classList.add("galeria__element--ukryty");
+            aktualizujGrupy();
+          }
+        }, CZAS_ANIMACJI);
+      }
+    });
+    aktualizujGrupy();
+  };
+
+  przyciski.forEach((przycisk) => {
+    przycisk.addEventListener("click", () => {
+      przyciski.forEach((p) => {
+        p.classList.remove("active");
+        p.setAttribute("aria-pressed", "false");
+      });
+      przycisk.classList.add("active");
+      przycisk.setAttribute("aria-pressed", "true");
+      filtruj(przycisk.dataset.filter);
+    });
   });
 }

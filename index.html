@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Toyota Chaser JZX100 Tourer V – historia modelu, specyfikacja silnika 1JZ-GTE, galeria zdjęć i najczęstsze pytania.">
   <title>Toyota Chaser JZX100 Tourer V – japońska legenda driftu</title>
+  <!-- Ikona strony (favicon) w formacie SVG -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <!-- Czcionki Google Fonts: Kanit (nagłówki) i Plus Jakarta Sans (treść) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +30,8 @@
         <li><a class="nawigacja__link" href="#faq">FAQ</a></li>
       </ul>
     </nav>
+    <!-- Pasek postępu przewijania strony -->
+    <div class="pasek-postepu" aria-hidden="true"></div>
   </header>
 
   <main>
@@ -104,81 +108,88 @@
     <!-- Sekcja galerii zdjęć -->
     <section class="sekcja" id="galeria" aria-labelledby="galeria-tytul">
       <h2 id="galeria-tytul">Galeria</h2>
-      <h3>Nasz egzemplarz</h3>
+      <!-- Przyciski filtrowania galerii -->
+      <div class="filtry" role="group" aria-label="Filtruj zdjęcia">
+        <button class="filtry__przycisk active" type="button" data-filter="wszystkie" aria-pressed="true">Wszystkie</button>
+        <button class="filtry__przycisk" type="button" data-filter="nadwozie" aria-pressed="false">Nadwozie</button>
+        <button class="filtry__przycisk" type="button" data-filter="silnik" aria-pressed="false">Silnik 1JZ</button>
+        <button class="filtry__przycisk" type="button" data-filter="wnetrze" aria-pressed="false">Wnętrze</button>
+      </div>
+      <h3 class="galeria__naglowek">Nasz egzemplarz</h3>
       <div class="galeria">
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX1.jpg" alt="Toyota Chaser JZX100 – widok ogólny egzemplarza" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX2.jpg" alt="Toyota Chaser JZX100 – sylwetka nadwozia" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX3.jpg" alt="Toyota Chaser JZX100 – ujęcie z boku pod kątem" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX4.jpg" alt="Toyota Chaser JZX100 – detale karoserii" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="silnik">
             <img class="galeria__zdjecie" src="assets/img/JZX5-engine.jpg" alt="Silnik 1JZ-GTE w komorze silnika Chasera" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="wnetrze">
             <img class="galeria__zdjecie" src="assets/img/JZX6-interior.jpg" alt="Wnętrze Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX7.jpg" alt="Toyota Chaser JZX100 – kolejne ujęcie nadwozia" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX8.jpg" alt="Toyota Chaser JZX100 – ujęcie z przodu" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX9.jpg" alt="Toyota Chaser JZX100 – ujęcie z tyłu" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX10.jpg" alt="Toyota Chaser JZX100 – detal stylistyczny" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX11.jpg" alt="Toyota Chaser JZX100 – ujęcie plenerowe" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX12.jpg" alt="Toyota Chaser JZX100 – profil auta" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX13-rims.jpg" alt="Felgi Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX14-side.jpg" alt="Bok Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="wnetrze">
             <img class="galeria__zdjecie" src="assets/img/JZX15-clocks.jpg" alt="Zegary na desce rozdzielczej Chasera" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="wnetrze">
             <img class="galeria__zdjecie" src="assets/img/JZX16-dash.jpg" alt="Deska rozdzielcza Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX17.jpg" alt="Toyota Chaser JZX100 – detal nadwozia" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX18.jpg" alt="Toyota Chaser JZX100 – ujęcie z niskiej perspektywy" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX20.jpg" alt="Toyota Chaser JZX100 – ujęcie z tyłu pod kątem" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX21.jpg" alt="Toyota Chaser JZX100 – ujęcie końcowe egzemplarza" loading="lazy" width="400" height="267">
           </figure>
       </div>
-      <h3>Inne egzemplarze</h3>
+      <h3 class="galeria__naglowek">Inne egzemplarze</h3>
       <div class="galeria">
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX-przod.jpg" alt="Przód innego egzemplarza Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX-przod-black.jpg" alt="Przód czarnej Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX-przod-blue.jpg" alt="Przód niebieskiej Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
-          <figure class="galeria__element">
+          <figure class="galeria__element" data-category="nadwozie">
             <img class="galeria__zdjecie" src="assets/img/JZX-tyl.jpg" alt="Tył innego egzemplarza Toyoty Chaser JZX100" loading="lazy" width="400" height="267">
           </figure>
       </div>
