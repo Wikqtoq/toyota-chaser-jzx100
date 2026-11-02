@@ -174,9 +174,9 @@ h3 {
   align-items: center;
   min-height: calc(100vh - var(--wysokosc-naglowka));
   padding: 4rem 5%;
-  background:
-    linear-gradient(90deg, rgba(15, 15, 17, 0.95) 30%, rgba(15, 15, 17, 0.4)),
-    url("../assets/img/JZX14-side.jpg") center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .hero__tresc {
@@ -530,7 +530,7 @@ h3 {
     flex-direction: column;
     gap: 0;
     padding: 0 16px;
-    background-color: rgba(15, 15, 17, 0.97);
+    background-color: var(--kolor-tlo);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--kolor-ramka);
@@ -800,4 +800,81 @@ h3 {
 .galeria__naglowek--ukryty,
 .galeria--ukryta {
   display: none;
+}
+
+/* ==========================================================
+   PRZESUWNE TŁO HERO I TŁO SEKCJI SPECYFIKACJI
+   ========================================================== */
+
+/* Kontener slajdów pod treścią hero */
+.hero__slajdy {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+/* Przyciemnienie slajdów, by tekst był czytelny */
+.hero__slajdy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 15, 17, 0.95) 30%, rgba(15, 15, 17, 0.45));
+}
+
+/* Każdy slajd: przenikanie i powolne przybliżanie (16 s na cały cykl) */
+.hero__slajd {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  animation: slajd-hero 16s infinite;
+}
+
+.hero__slajd:nth-child(2) { animation-delay: 4s; }
+.hero__slajd:nth-child(3) { animation-delay: 8s; }
+.hero__slajd:nth-child(4) { animation-delay: 12s; }
+
+@keyframes slajd-hero {
+  0%   { opacity: 0; transform: scale(1); }
+  6%   { opacity: 1; }
+  25%  { opacity: 1; }
+  31%  { opacity: 0; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.1); }
+}
+
+/* Tło sekcji specyfikacji: zegary Chasera z efektem paralaksy */
+#specyfikacja {
+  background:
+    linear-gradient(rgba(15, 15, 17, 0.88), rgba(15, 15, 17, 0.92)),
+    url("../assets/img/JZX15-clocks.jpg") center / cover no-repeat fixed;
+}
+
+/* Lekko przezroczyste kafelki, by prześwitywało tło */
+#specyfikacja .tabela tr {
+  background-color: rgba(26, 26, 30, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Na urządzeniach dotykowych wyłączamy paralaksę (problemy z wydajnością) */
+@media (max-width: 992px), (hover: none) {
+  #specyfikacja {
+    background-attachment: scroll;
+  }
+}
+
+/* Ograniczenie ruchu: tylko pierwszy slajd, bez animacji */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero__slajd {
+    animation: none;
+  }
+
+  .hero__slajd:first-child {
+    opacity: 1;
+  }
 }
