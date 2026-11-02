@@ -31,6 +31,7 @@
 }
 
 html {
+  overflow-x: hidden;
   scroll-behavior: smooth;
   /* Przesunięcie kotwic o wysokość przyklejonego nagłówka */
   scroll-padding-top: var(--wysokosc-naglowka);
@@ -401,9 +402,204 @@ h3 {
   text-decoration: none;
 }
 
-/* ---------- Podstawowe dopasowanie galerii do mniejszych ekranów ---------- */
-@media (max-width: 1024px) {
+/* ==========================================================
+   RESPONSYWNOŚĆ (RWD)
+   ========================================================== */
+
+/* Minimalny obszar kliknięcia 44x44 px dla elementów interaktywnych */
+.nawigacja__link,
+.stopka a,
+.przycisk,
+.faq__pytanie {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.faq__pytanie {
+  display: flex;
+}
+
+/* Tablety: do 992 px */
+@media (max-width: 992px) {
+  /* Galeria w dwóch kolumnach */
   .galeria {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sekcja {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero {
+    min-height: 70vh;
+  }
+}
+
+/* Nawigacja mobilna: do 768 px */
+@media (max-width: 768px) {
+  /* Widoczny przycisk hamburgera */
+  .nawigacja__przycisk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 1px solid var(--kolor-ramka);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color var(--przejscie);
+  }
+
+  .nawigacja__przycisk:hover {
+    border-color: var(--kolor-akcent);
+  }
+
+  /* Ikona hamburgera z trzech kresek */
+  .nawigacja__ikona,
+  .nawigacja__ikona::before,
+  .nawigacja__ikona::after {
+    display: block;
+    position: relative;
+    width: 22px;
+    height: 2px;
+    background-color: var(--kolor-tekst);
+    transition: transform var(--przejscie), background-color var(--przejscie);
+  }
+
+  .nawigacja__ikona::before,
+  .nawigacja__ikona::after {
+    content: "";
+    position: absolute;
+    left: 0;
+  }
+
+  .nawigacja__ikona::before {
+    top: -7px;
+  }
+
+  .nawigacja__ikona::after {
+    top: 7px;
+  }
+
+  /* Zamiana ikony w krzyżyk po otwarciu menu */
+  .menu-aktywne .nawigacja__ikona {
+    background-color: transparent;
+  }
+
+  .menu-aktywne .nawigacja__ikona::before {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-aktywne .nawigacja__ikona::after {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Ukryta lista linków rozwijana pod nagłówkiem */
+  .nawigacja__lista {
+    position: absolute;
+    top: var(--wysokosc-naglowka);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 16px;
+    background-color: rgba(15, 15, 17, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--kolor-ramka);
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: max-height var(--przejscie), visibility var(--przejscie);
+  }
+
+  .menu-aktywne .nawigacja__lista {
+    max-height: 400px;
+    visibility: visible;
+  }
+
+  /* Duże pozycje menu oddzielone liniami */
+  .nawigacja__lista li + li {
+    border-top: 1px solid var(--kolor-ramka);
+  }
+
+  .nawigacja__link {
+    display: flex;
+    width: 100%;
+    min-height: 56px;
+    font-size: 1.1rem;
+  }
+
+  .nawigacja__link::after {
+    display: none;
+  }
+}
+
+/* Smartfony: do 600 px (m.in. 375–390 px) */
+@media (max-width: 600px) {
+  /* Boczne marginesy min. 16 px */
+  .naglowek,
+  .hero,
+  .sekcja,
+  .sekcja--ciemna,
+  .stopka {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .sekcja {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Mniejsze nagłówki, by tekst mieścił się na ekranie */
+  .hero h1 {
+    font-size: 1.9rem;
+    overflow-wrap: break-word;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero__podtytul {
+    font-size: 1rem;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  /* Przycisk CTA na całą szerokość */
+  .przycisk {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Galeria w dwóch zwartych kolumnach */
+  .galeria {
+    gap: 0.5rem;
+  }
+
+  /* Kafelki specyfikacji w jednej kolumnie */
+  .tabela tbody,
+  .sekcja__kolumny {
+    grid-template-columns: 1fr;
+  }
+
+  .karta,
+  .tabela tr {
+    padding: 1.25rem;
+  }
+
+  .faq__pytanie {
+    padding: 1rem;
+  }
+
+  .faq__odpowiedz {
+    padding: 0 1rem 1rem;
   }
 }
