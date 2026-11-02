@@ -20,6 +20,14 @@ Projekt wykonano jako pracę zaliczeniową z tworzenia stron internetowych.
 - **Responsywne menu hamburger** – rozwijane na ekranach do 768 px, z dynamiczną zmianą atrybutu `aria-expanded`, zamykane po wybraniu linku lub klawiszem Escape.
 - **Modal / lightbox galerii** – powiększanie zdjęć z podpisem pobieranym z atrybutu `alt`, obsługa klawiaturą (Tab, Enter, Escape), zamykanie krzyżykiem lub kliknięciem w tło.
 - **Przycisk Scroll to Top** – pojawia się po przewinięciu strony o 300 px i płynnie przewija stronę na górę.
+- **Filtrowanie galerii** – przyciski „Wszystkie”, „Nadwozie”, „Silnik 1JZ” i „Wnętrze” płynnie pokazują lub ukrywają zdjęcia na podstawie atrybutu `data-category`.
+- **Pasek postępu przewijania** – czerwony pasek pod nagłówkiem pokazuje, jaką część strony już przewinięto.
+
+## Rozwiązania CSS
+
+- Przenikający pokaz zdjęć w sekcji hero (animacje `@keyframes`) z obsługą `prefers-reduced-motion`.
+- Tła z efektem paralaksy w sekcjach specyfikacji (zegary) i FAQ (silnik 1JZ-GTE).
+- Czcionki Kanit i Plus Jakarta Sans z Google Fonts, ikona strony w formacie SVG.
 
 ## Struktura katalogów
 
@@ -33,6 +41,7 @@ toyota-chaser-jzx100/
 ├── js/
 │   └── main.js       # interakcje strony
 └── assets/
+    ├── favicon.svg   # ikona strony
     └── img/          # zdjęcia do galerii
 ```
 
