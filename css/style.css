@@ -2,8 +2,7 @@
    Arkusz stylów strony Toyota Chaser JZX100 – motyw dark JDM
    ========================================================== */
 
-/* Import czcionki Inter */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+/* Czcionki podpięte w index.html (Google Fonts: Kanit i Plus Jakarta Sans) */
 
 /* Zmienne globalne: kolory, odstępy, przejścia */
 :root {
@@ -19,6 +18,8 @@
   --przejscie: 0.3s ease;
   --szerokosc-max: 1200px;
   --wysokosc-naglowka: 64px;
+  --font-naglowki: "Kanit", sans-serif;
+  --font-tresc: "Plus Jakarta Sans", sans-serif;
 }
 
 /* Reset domyślnych stylów */
@@ -38,7 +39,7 @@ html {
 }
 
 body {
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-tresc);
   background-color: var(--kolor-tlo);
   color: var(--kolor-tekst);
   line-height: 1.6;
@@ -66,6 +67,11 @@ button:focus-visible,
 summary:focus-visible {
   outline: 3px solid var(--kolor-akcent);
   outline-offset: 3px;
+}
+
+h1, h2, h3,
+.logo {
+  font-family: var(--font-naglowki);
 }
 
 h1, h2, h3 {
@@ -177,6 +183,15 @@ h3 {
   max-width: 650px;
 }
 
+/* Japoński zapis nazwy modelu katakaną */
+.hero__katakana {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  letter-spacing: 0.3em;
+  color: var(--kolor-akcent);
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+
 .hero h1 {
   font-size: clamp(2.2rem, 6vw, 4rem);
   text-transform: uppercase;
@@ -245,6 +260,15 @@ h3 {
 .karta:hover {
   transform: translateY(-4px);
   border-color: var(--kolor-akcent);
+}
+
+/* Odstęp między kolejnymi rzędami kart */
+.sekcja__kolumny--odstep {
+  margin-top: 1.5rem;
+}
+
+.karta--szeroka {
+  margin-top: 1.5rem;
 }
 
 .karta p {
@@ -556,7 +580,16 @@ h3 {
   }
 
   /* Mniejsze nagłówki, by tekst mieścił się na ekranie */
-  .hero h1 {
+  /* Japoński zapis nazwy modelu katakaną */
+.hero__katakana {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  letter-spacing: 0.3em;
+  color: var(--kolor-akcent);
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+
+.hero h1 {
     font-size: 1.9rem;
     overflow-wrap: break-word;
   }
