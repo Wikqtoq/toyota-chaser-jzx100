@@ -186,6 +186,18 @@
     <a class="stopka__gora" href="#gora">Powrót na górę</a>
   </footer>
 
+  <!-- Okno modalne do powiększania zdjęć z galerii -->
+  <dialog class="modal" id="modal-galerii" aria-label="Powiększone zdjęcie">
+    <button class="modal__zamknij" type="button" aria-label="Zamknij podgląd">&times;</button>
+    <figure class="modal__tresc">
+      <img class="modal__zdjecie" src="" alt="">
+      <figcaption class="modal__podpis"></figcaption>
+    </figure>
+  </dialog>
+
+  <!-- Przycisk powrotu na górę strony -->
+  <button class="przycisk-gora" type="button" aria-label="Przewiń na górę strony">&uarr;</button>
+
   <!-- Skrypt z interakcjami strony -->
   <script src="js/main.js"></script>
 </body>
